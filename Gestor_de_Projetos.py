@@ -4,7 +4,6 @@ import json
 
 rodando = True
 
-
 # DEF DA CAIXA PARA MELHORAR VISUALIZAÇÃO (FEITO EXCLUSIVAMENTE POR IA)
 def super_caixa(texto):
     linhas = texto.split('\n')
@@ -13,7 +12,6 @@ def super_caixa(texto):
     for l in linhas:
         print(f"│{l.center(largura - 2)}│")
     print("┗" + "━" * (largura - 2) + "┛")
-
 
 # COMANDO ABOUT
 def mostrarSobre():
@@ -34,7 +32,6 @@ def mostrarSobre():
     input("Pressione ENTER para continuar")
     time.sleep(1)
 
-
 # COMANDO LIST
 def listarProjetos(lista):
     if not lista:
@@ -48,14 +45,12 @@ def listarProjetos(lista):
     input("\nPressione ENTER para continuar")
     time.sleep(1)
 
-
 # COMANDO QUIT
 def sair_do_programa():
     time.sleep(1)
     super_caixa("Até logo! Encerrando o programa...")
     time.sleep(2)
     return False
-
 
 # COMANDO ADD
 def adicionarProjetos(lista_recebida):
@@ -88,14 +83,11 @@ def adicionarProjetos(lista_recebida):
                                 "criacao": datetime.datetime.now().strftime('%d/%m/%Y às %H:%M')
                             }
                             lista_recebida.append(projetos_dicionario)
-                            super_caixa(
-                                f"Pronto! O projeto '{nome_projeto}' foi salvo com sucesso.\nData de criação: {projetos_dicionario['criacao']}")
-
+                            super_caixa(f"Pronto! O projeto '{nome_projeto}' foi salvo com sucesso.\nData de criação: {projetos_dicionario['criacao']}")
         time.sleep(2)
     except ValueError:
         print("Ops! Você digitou um valor inválido. Use apenas números.")
         input("Pressione ENTER para tentar novamente.")
-
 
 # COMANDO DELETAR PROJETO
 def deletarProjeto(lista_projetos):
@@ -125,7 +117,6 @@ def deletarProjeto(lista_projetos):
             super_caixa("Não encontramos nenhum projeto com esse nome. Verifique a digitação e tente de novo.")
             input("Pressione ENTER para continuar")
     time.sleep(1)
-
 
 # COMANDO ATUALIZAR PROJETO EXISTENTE
 def atualizarProjetos(lista_projetos):
@@ -182,7 +173,6 @@ def atualizarProjetos(lista_projetos):
     input("\nPressione ENTER para continuar")
     time.sleep(1)
 
-
 # CARREGAR DADOS
 def carregarDados():
     try:
@@ -196,12 +186,10 @@ def carregarDados():
         projetos_lista = []
     return projetos_lista
 
-
 # SALVAR DADOS
 def salvarDados(lista_projetos):
     with open("SaveArchives.json", "w") as arquivo:
         json.dump(lista_projetos, arquivo, indent=4)
-
 
 # COMANDO ESTATÍSTICAS
 def mostrarEstatisticas(lista):
@@ -225,7 +213,6 @@ def mostrarEstatisticas(lista):
     input("\nPressione ENTER para continuar.")
     time.sleep(1)
 
-
 # COMANDO PROCURAR
 def procurarProjeto(lista):
     while True:
@@ -246,7 +233,6 @@ def procurarProjeto(lista):
             break
         else:
             super_caixa("Não encontramos nenhum projeto com esse nome. Verifique a digitação e tente de novo.")
-
 
 # Lista para o armazenamento dos projetos
 projetos = carregarDados()
