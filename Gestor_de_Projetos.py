@@ -68,8 +68,8 @@ def adicionarProjetos(lista_recebida):
                     if not nome_projeto:
                         print("ERRO: Você não pode criar um arquivo sem nome.")
                     else:
-                        descricao = input("Qual será a descrição do projeto >>> ")
-                        status = input("Status (Em andamento / Concluído) >>> ").upper()
+                        descricao = input("Qual será a descrição do projeto? >>> ")
+                        status = input("Status atual? (Em andamento / Concluído) >>> ").upper()
                         if not status:
                             print("Você não pode criar um arquivo sem mencionar o status.")
                         else:
@@ -192,18 +192,21 @@ def salvarDados(lista_projetos):
 def mostrarEstatisticas(lista):
     concluidos = 0
     em_andamento = 0
-    data_ultimo = "Nenhum projeto finalizado."
+    data_atual_objeto = "Nenhum projeto finalizado."
+    salvar_data = None
     for projeto in lista:
         if projeto['status'] in ["CONCLUIDO", "CONCLUÍDO", "CONCLUIDA", "CONCLUÍDA"]:
             concluidos += 1
-            data_ultimo = projeto['criacao']
+            data_atual_objeto = datetime.datetime.strptime(projeto['criacao'], '%d/%m/%Y às %H:%M')
+            if salvar_data is None or data_atual_objeto > salvar_data:
+                salvar_data = data_atual_objeto
         elif projeto['status'] == "EM ANDAMENTO":
             em_andamento += 1
     print(f"Você possui {concluidos} projetos concluídos e {em_andamento} projetos em andamento.")
-    if data_ultimo == "Nenhum projeto finalizado.":
-        print(data_ultimo)
+    if data_atual_objeto == "Nenhum projeto finalizado.":
+        print(data_atual_objeto)
     else:
-        print(f"{data_ultimo} foi o último dia em que você finalizou um projeto.")
+        print(f"{salvar_data.strftime('%d/%m/%Y às %H:%M')} foi o último dia em que você finalizou um projeto.")
     input("\nPressione ENTER para continuar.")
     time.sleep(1)
 
