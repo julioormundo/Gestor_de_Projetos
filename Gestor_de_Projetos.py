@@ -58,6 +58,8 @@ def adicionarProjetos(lista_recebida):
         quantidade_projetos = int(input("Quantidade de projetos que deseja adicionar >>> "))
         if quantidade_projetos <= 0:
             print("Ops! O valor deve ser um número inteiro superior a zero.")
+        elif quantidade_projetos > 5:
+            print("Ops! Por segurança, você só pode adicionar entre 1 e 5 projetos por vez.")
         else:
             for projeto in range(quantidade_projetos):
                 achou_projeto = False
@@ -86,7 +88,7 @@ def adicionarProjetos(lista_recebida):
                             super_caixa(f"Pronto! O projeto '{nome_projeto}' foi salvo com sucesso.\nData de criação: {projetos_dicionario['criacao']}")
         time.sleep(2)
     except ValueError:
-        print("Ops! Você digitou um valor inválido. Use apenas números.")
+        print("Ops! Você digitou um valor inválido. Use apenas números inteiros.")
         input("Pressione ENTER para tentar novamente.")
 
 # COMANDO DELETAR PROJETO
@@ -99,8 +101,7 @@ def deletarProjeto(lista_projetos):
             print(f"- {projeto['nome']}")
             print("----------------------------")
 
-        deletar_projeto = input(
-            "Digite o nome do projeto que deseja deletar. (Digite 'all' para apagar todos) >>> ").lower()
+        deletar_projeto = input("Digite o nome do projeto que deseja deletar. (Digite 'all' para apagar todos) >>> ").lower()
         achou_projeto = False
         if deletar_projeto == "all":
             lista_projetos.clear()
@@ -216,8 +217,8 @@ def mostrarEstatisticas(lista):
 # COMANDO PROCURAR
 def procurarProjeto(lista):
     while True:
-        usuario_buscando = input("Qual projeto está procurando? (Digite 'quit' para voltar)\n>>> ").lower()
-        if usuario_buscando.lower() == "quit":
+        usuario_buscando = input("Qual projeto está procurando? (Digite 'sair' para voltar)\n>>> ").lower()
+        if usuario_buscando.lower() in ["quit", 'sair']:
             print("Voltando para a tela anterior...")
             time.sleep(1)
             break
